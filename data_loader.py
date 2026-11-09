@@ -11,7 +11,7 @@ def load_logs():
     return logs
 
 
-
+# Verify log file was loaded
 if __name__ == "__main__":
     logs = load_logs()
-    print(logs[:5])
+    print("Total lines loaded:", len(logs))
