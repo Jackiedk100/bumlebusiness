@@ -1,5 +1,7 @@
 # Import shlex to preserve quoted messages with spacing
 import shlex
+# Import pandas to structure log data in a table (DataFrame)
+import pandas as pd
 
 # create function to load raw log file.
 
@@ -25,6 +27,12 @@ if __name__ == "__main__":
     logs = load_logs()
     # Parse each log entry and store dictionaries in parsed_logs
     parsed_logs = [parse_log(line) for line in logs]
+
+    #Convert list of dictionaries into a DataFrame (rows = log entries, columns = fields)
+    df = pd.DataFrame(parsed_logs)
+    #Display first 10 rows to verify the table structure
+    print(df.head(10))
+
     print("Parsed entries:", len(parsed_logs))
     # Number of lines loaded from log
     print("Total lines loaded:", len(logs))
