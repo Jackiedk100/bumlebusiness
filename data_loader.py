@@ -1,7 +1,13 @@
+# Import datetime til timestamp verificering
+from datetime import datetime
 # Import shlex to preserve quoted messages with spacing
 import shlex
+
+
 # Import pandas to structure log data in a table (DataFrame)
 import pandas as pd
+
+
 
 # create function to load raw log file.
 
@@ -14,8 +20,22 @@ def load_logs():
     except FileNotFoundError:
         print("File not found")
         return None
-def parse_log(log_line):
+def parse_log(log_line, line_number):
     parts = shlex.split(log_line)
+
+
+    # If no indexes are present in parts
+    if not parts:
+        print("Empty log entry")
+        return None
+    # Verify timestamp formnat is correct
+    try:
+        datetime.strptime(parts[0], "%Y-%m-%dT%H:%M:%S")
+        # Except error and print invalid timestamp and line number
+    except ValueError:
+        print(f"Invalid timestamp at line {line_number}: {parts[0]}")
+        return None
+
 
     # Empty dictionary for parsed log entry
     log_entry = {}
@@ -24,8 +44,14 @@ def parse_log(log_line):
 
     # Divide log entries into key=value pair
     for part in parts[1:]:
-        key, value = part.split("=", 1)
-        log_entry[key] = value
+        # Check for = from parts [1]
+        if "=" in part:
+            key, value = part.split("=", 1)
+            log_entry[key] = value
+            # else report key-value error and line number and part of log that is wrong
+        else:
+            print(f"Invalid key-value pair at line {line_number}: {part}")
+            return None
     return log_entry
 
 # Verify successful log file loading and parsing
@@ -36,7 +62,17 @@ if __name__ == "__main__":
         print("No logs found")
     else:
         # Parse each log entry and store dictionaries in parsed_logs
-        parsed_logs = [parse_log(line) for line in logs]
+        parsed_logs = []
+        # Enumerate lines starting from 1
+        for line_number, line in enumerate(logs, start=1):
+            parsed_entry = parse_log(line, line_number)
+            # If parsed data is good
+            if parsed_entry is not None:
+                parsed_logs.append(parsed_entry)
+            # Else print log line number that fails
+            else:
+                print(f"Invalid log entry at line {line_number}")
+
 
         #Convert list of dictionaries into a DataFrame (rows = log entries, columns = fields)
         df = pd.DataFrame(parsed_logs)
