@@ -1,9 +1,14 @@
 import table_view as tv
+import visualization as vis
 
 
 def print_menu():
     print("\n=== Log Viewer ===")
     print("1: Show table")
+    print("2: Scatter plot - log levels per IP")
+    print("3: Bar chart - status per source IP")
+    print("4: Line chart - activity over time")
+    print("5: Scatter plot - IP activity vs. failed share")
     print("0: Exit")
 
 
@@ -20,6 +25,14 @@ def main():
 
         if choice == "1":
             tv.show_table(df)
+        elif choice == "2":
+            vis.plot_scatter_levels_per_ip(df)
+        elif choice == "3":
+            vis.plot_status_per_ip(df)
+        elif choice == "4":
+            vis.plot_activity_over_time(df)
+        elif choice == "5":
+            vis.plot_scatter_ip_activity(df)
         elif choice == "0":
             print("Goodbye")
             break
