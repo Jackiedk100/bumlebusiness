@@ -75,13 +75,7 @@ def search_menu(df):
             print(f"Found {len(results)} logs entries:")
             tv.show_table(results, rows=len(results))
 
-# Run the search menu when this file is started directly
-if __name__ == "__main__":
-    logs_df = tv.build_table()
-    if logs_df is None:
-        print("No logs found")
-    else:
-        search_menu(logs_df)
+
 
 
 
