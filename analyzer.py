@@ -1,5 +1,6 @@
 # Import table_view to reuse the shared log table
 import table_view as tv
+import pandas as pd
 
 # Columns that can be searched, linked to the menu choices
 SEARCH_COLUMNS = {
@@ -17,20 +18,20 @@ def filter_failed_events(df):
     return df[df["status"].isin(["FAILED", "BLOCKED"])]
 
 # Return log entries where one column matches the search value
-def search_logs(df, column, values):
+def search_logs(df, column, keyword):
 
     # Chek that the column exists, so a typo can't crash the program
     if column not in df.columns:
         print(f"Unknown column: {column}")
         return df.iloc[0:0]
-    return df[df[column] == values]
+    return df[df[column].astype(str).str.contains(keyword, case=False, regex=False, na=False)]
 
 # Return log entries where IP, user or event matches the search value
-def search_all(df, value):
-    # Event names are stored in UPPERCASE in the log, so compare with an uppercase value
-    event_value = value.upper()
-    # "|" means OR: keep the row if at least one of the columns matches
-    return df[(df["src_ip"] == value) | (df["user"] == value) | (df["event"] == event_value)]
+def search_all(df, keyword):
+    mask = pd.Series(False, index=df.index)
+    for column in SEARCH_COLUMNS.values():
+        mask |= df[column].astype(str).str.contains(keyword, case=False, regex=False, na=False)
+    return df[mask]
 
 
 # Printing the search menu with the 4 options

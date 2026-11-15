@@ -1,13 +1,16 @@
 import table_view as tv
+import analyzer as al
 
 
 def print_menu():
     print("\n=== Log Viewer ===")
     print("1: Show table")
+    print("2: Search in log")
+    print("3: Show visualization")
     print("0: Exit")
 
 # Printing the search menu with the 4 options
-def print_search_menu:
+def print_search_menu():
     print("\n===== Search logs =====")
     print("1: Search by IP")
     print("2: Search by User")
@@ -28,6 +31,8 @@ def main():
 
         if choice == "1":
             tv.show_table(df)
+        elif choice == "2":
+            al.search_menu(df)
         elif choice == "0":
             print("Goodbye")
             break
