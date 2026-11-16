@@ -4,30 +4,44 @@ Dette er vores Github project, hvor vi skal bruge SCRUM og indlæse, vise, analy
 
 ## Introduktion
 
+> **Mangler:** En kort beskrivelse af projektet, dets formål og den problemstilling, det skal løse.
+
 
 ## SCRUM
 
+> **Mangler:** En forklaring af SCRUM som arbejdsmetode og af de fem elementer nedenfor.
+
 ### Sprint
+
+> **Mangler:** Hvordan projektet er planlagt og gennemført i ét sprint.
 
 *[Screenshot: sprintplan]*
 <!-- ![Sprintplan](screenshots/sprint.png) -->
 
 ### User Stories
 
+> **Mangler:** Hvad en User Story er, og hvordan de bruges i projektet.
+
 *[Screenshot: User Stories]*
 <!-- ![User Stories](screenshots/user-stories.png) -->
 
 ### Tasks
+
+> **Mangler:** Hvad Tasks er, og hvordan de knyttes til User Stories.
 
 *[Screenshot: Tasks i ScrumWise]*
 <!-- ![Tasks](screenshots/tasks.png) -->
 
 ### Acceptkriterier
 
+> **Mangler:** Hvad Acceptkriterier bruges til, og hvordan de definerer, hvornår en opgave er løst.
+
 *[Screenshot: Acceptkriterier i ScrumWise]*
 <!-- ![Acceptkriterier](screenshots/acceptkriterier.png) -->
 
 ### Task Board
+
+> **Mangler:** Hvad Task Boardet bruges til, og hvordan det giver overblik over projektets opgaver.
 
 *[Screenshot: Task Board i starten af sprintet]*
 <!-- ![Task Board start](screenshots/taskboard-start.png) -->
@@ -39,6 +53,8 @@ Dette er vores Github project, hvor vi skal bruge SCRUM og indlæse, vise, analy
 <!-- ![Task Board slut](screenshots/taskboard-slut.png) -->
 
 ### Sammenhængen mellem User Stories, Tasks, Acceptkriterier og Task Board
+
+> **Mangler:** Hvordan de fire elementer hænger sammen.
 
 
 ## Kom i gang
@@ -226,20 +242,28 @@ Testet ved brug af en misdannet del (`level INFO`) uden `=`-tegn.
 <details>
 <summary><b>Table View – Udvikling og implementering</b> (klik for at åbne)</summary>
 
+> **Mangler:** Hvad `table_view.py` gør, og hvordan US3 er løst (tabel med klare overskrifter, første eller seneste 20 linjer). Skriv også om valg, funktioner og fejlhåndtering.
+
 </details>
 
 <details>
 <summary><b>Analyzer – Udvikling og implementering</b> (klik for at åbne)</summary>
+
+> **Mangler:** Hvad `analyzer.py` gør, og hvordan US4 er løst (filtrering på status, IP og tidsrum, søgning på IP/bruger/event, brute force-detektion). Skriv også om valg, funktioner og fejlhåndtering.
 
 </details>
 
 <details>
 <summary><b>Visualization – Udvikling og implementering</b> (klik for at åbne)</summary>
 
+> **Mangler:** Hvad `visualization.py` gør, og hvordan US5 og US6 er løst (scatter plots, søjle- og linjediagrammer, diagrammer med titel, akser og signaturforklaring). Skriv også om, hvilke sammenhænge i logfilen I fandt, og hvorfor I valgte netop de diagramtyper.
+
 </details>
 
 <details>
 <summary><b>Main – Udvikling og implementering</b> (klik for at åbne)</summary>
+
+> **Mangler:** Hvad `main.py` gør, og hvordan det binder modulerne sammen i en menu (US7: hele programmet startes fra `main.py`). Skriv også om, hvordan I har arbejdet med US8 og US9 (Task Board, GitHub og README).
 
 </details>
 
@@ -247,4 +271,8 @@ Testet ved brug af en misdannet del (`level INFO`) uden `=`-tegn.
 
 ## Resultater
 
+> **Mangler:** En opsummering af det færdige projekt og de vigtigste resultater.
+
 ## Forbedringsmuligheder
+
+> **Mangler:** Eventuelle forbedringsmuligheder.
