@@ -14,68 +14,144 @@ Projektet er lavet via pycharm, VS Code, og Scrum.
 
 ## SCRUM
 
-> **Mangler:** En forklaring af SCRUM som arbejdsmetode og af de fem elementer nedenfor.
+**SCRUM er et effektivt arbejdsværktøj hvor man arbejder i perioder (Sprints), og løbende tilpasser sit arbejde.**
 
 ### Sprint
 
-> **Mangler:** Hvordan projektet er planlagt og gennemført i ét sprint.
+**Et Sprint er en fast periode hvor man vælger hvilket User Stories der skal laves indenfor det planlagte Sprint.**
 
 *[Screenshot: sprintplan]*
 ![Sprintplan](screenshots/sprint.png)
 
 ### User Stories
 
-> **Mangler:** Hvad en User Story er, og hvordan de bruges i projektet.
+**User Stories beskriver hvad brugere har brug for og hvorfor. I projektet bruges de til at bestemme hvad der skal bygges.**
 
 *[Screenshot: User Stories]*
 ![User Stories](screenshots/user-stories.png)
 
 ### Tasks
 
-> **Mangler:** Hvad Tasks er, og hvordan de knyttes til User Stories.
+**Tasks er små opgaver som en User Story deles op i. En User Story er færdig når de tilhørende tasks er løst.**
 
-*[Screenshot: Tasks i ScrumWise]*
-<!-- ![Tasks](screenshots/tasks.png) -->
 *Liste over vores Tasks i Scrumwise*
+
 **US1: Indlæsning af rå VPN-logfiler**
 - Opret python fil til filhåndtering.
 - Opret funktion til indlæsning af logfil, cyber_security_log_sample.txt.
 - Verificer at alle rækker og kolonner er blevet indlæst.
 
+
 **US2: Robust fejlhåndtering ved fil- og datafejl**
 - Tilføj try-except i data_loader.py.
 - Test programmet med en ugyldig filsti og manglende fil.
+
 
 **US3: Struktureret tabelvisning af logdata**
 - Implementér formatering vha. f.eks. tabulate eller indbygget Pandas print.
 - Opret visningsfunktion.
 
+
 **US4: Sikkerhedsfiltrering og søgning i logdata**
-- 
+- Implementér filtreringslogik i et analysemodul (analyzer.py).
+- Udvikle funktion til søgning på IP/bruger/fejltype.
+
+
+**US5: Korrelationsanalyse med Scatter Plots**
+- Opret visualiseringsmodul.
+- Skriv funktion til oprettelse af scatter plots med relevante kolonner fra logfilen.
+- Test plottet med data fra logfilen.
+
+
+**US6: Visuel præsentation af fundne problemer**
+- Tilføj understøttelse for søjle-/linjediagrammer i visualization.py.
+- Sikr at diagrammerne gemmes eller vises korrekt ved kørsel.
+
+
+**US7: Overskuelig kodestruktur og god, ren kode**
+- Strukturér projektmappen med de aftalte scripts.
+- Gennemgå koden for at sikre et rent design, undgå gentagelser, gode kommentarer og variabbel navne.
+
+
+**US8: Opsætning af Task Board og Agil Sprint-styring**
+- Opret Task Board.
+- Tilføj alle User Stories og Tasks til boardet.
+
+
+**US9: Udarbejdelse af GitHub Repository og README.md**
+- Opret repository på GitHub og push koden.
+- Skriv README.md med fokus på introduktion, metodeforklaring og konklusion.
+- Verificer at linket virker og alt indhold er til stede.
+
 
 ### Acceptkriterier
 
-> **Mangler:** Hvad Acceptkriterier bruges til, og hvordan de definerer, hvornår en opgave er løst.
+**Acceptkriterier er tydelige krav som gør det klart hvornår opgaven er løst.**
 
-*[Screenshot: Acceptkriterier i ScrumWise]*
-<!-- ![Acceptkriterier](screenshots/acceptkriterier.png) -->
+*Liste over vores acceptkriterier i Scrumwise*
+
+**US1: Indlæsning af rå VPN-logfiler**
+- Filen cyber_security_log_sample.txt indlæses fejlfrit i en struktureret datastruktur (f.eks. Pandas DataFrame).
+- Kolonnenavne og datatyper parses korrekt.
+- Programmet bekræfter succesfuld indlæsning i konsollen.
+
+
+**US2: Robust fejlhåndtering ved fil- og datafejl**
+- Hvis cyber_security_log_sample.txt ikke findes, fanges dette med en catch og der udskrives en brugervenlig fejlmeddelelse.
+- Ugyldige datarækker eller formater håndteres uden at stoppe hele programmet.
+
+
+**US3: Struktureret tabelvisning af logdata**
+- Tabellen vises med klare kolonneoverskrifter og afrettede rækker.
+- Mulighed for at vise et uddrag (f.eks. de første eller seneste 20 loglinjer) for at undgå at overbelaste konsollen.
+
+
+**US4: Sikkerhedsfiltrering og søgning i logdata**
+- Programmet skal kunne filtrere rækker ud fra betingelser (f.eks. statuskode, IP-adresse eller tidsrum).
+- De filtrerede resultater præsenteres i en dedikeret oversigt.
+
+
+**US5: Korrelationsanalyse med Scatter Plots**
+- Scriptet genererer mindst ét funktionelt scatter plot ved hjælp af matplotlib.
+- Plottet har tydelig titel, akse-labels og signaturforklaring.
+- Plottet vises grafisk for brugeren.
+
+
+**US6: Visuel præsentation af fundne problemer**
+- Programmet genererer diagram(mer), der fremhæver fundne problemer (f.eks. trafik-spikes).
+- Diagrammerne er intuitive og understøtter konklusionen på sikkerhedsundersøgelsen.
+
+
+**US7: Overskuelig kodestruktur og god, ren kode**
+- Koden er opdelt i moduler (f.eks. main.py, data_loader.py, analyzer.py, visualization.py).
+- Funktioner har velvalgte variable- og funktionsnavne samt docstrings/kommentarer.
+- Koden kan startes samlet fra main.py.
+
+
+**US8: Opsætning af Task Board og Agil Sprint-styring**
+- Alle ovenstående User Stories er oprettet som elementer på Task Boardet med tilhørende Tasks og acceptkriterier.
+- Status på opgaverne opdateres løbende under udviklingen.
+
+
+**US9: Udarbejdelse af GitHub Repository og README.md**
+- Oprettet et offentligt GitHub-repo med kildekode og cyber_security_log_sample.txt.
+- README.md indeholder de tre krævede hovedafsnit: Introduktion, SCRUM (forklaring af US, Tasks, Acceptkriterier, Task Board og sammenhæng) og Konklusion.
+
 
 ### Task Board
 
-> **Mangler:** Hvad Task Boardet bruges til, og hvordan det giver overblik over projektets opgaver.
+**Task Board er en tavle hvor man kan holde styr på alle sine Tasks. De bliver flyttet rundt fra To Do, In Progress til Done alt efter når de bliver løst.**
 
-*[Screenshot: Task Board i starten af sprintet]*
-<!-- ![Task Board start](screenshots/taskboard-start.png) -->
+*[Screenshot: Task Board billede 1]*
+![Task Board start](screenshots/taskboard-1.png)
 
-*[Screenshot: Task Board midt i sprintet]*
-<!-- ![Task Board midt](screenshots/taskboard-midt.png) -->
+*[Screenshot: Task Board billede 2]*
+![Task Board midt](screenshots/taskboard-2.png)
 
-*[Screenshot: Task Board til sidst, alle opgaver i Done]*
-<!-- ![Task Board slut](screenshots/taskboard-slut.png) -->
 
-### Sammenhængen mellem User Stories, Tasks, Acceptkriterier og Task Board
+### Sammenhængen mellem User Stories, Tasks, Accheptkriterier og Task Board
 
-> **Mangler:** Hvordan de fire elementer hænger sammen.
+**User Stories deles op i Tasks der bliver flyttet rundt på Task boarded i løbet af et Sprint. Acceptkriterier afgør hvornår en User Story er løst.**
 
 
 ## Kom i gang
