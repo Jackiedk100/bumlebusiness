@@ -242,7 +242,42 @@ Testet ved brug af en misdannet del (`level INFO`) uden `=`-tegn.
 <details>
 <summary><b>Table View – Udvikling og implementering</b> (klik for at åbne)</summary>
 
-> **Mangler:** Hvad `table_view.py` gør, og hvordan US3 er løst (tabel med klare overskrifter, første eller seneste 20 linjer). Skriv også om valg, funktioner og fejlhåndtering.
+`table_view.py` viser loggen som en tabel med overskrifter og løser US3. Man kan vælge at se de første eller de seneste 20 linjer.
+
+### Valget af pandas
+
+Vi har kun lært om plotly og matplotlib i undervisningen. Efter lidt research blev vi enige om at bruge pandas, fordi det er lavet til at arbejde med data og gør det nemt at lave rå data om til noget mere overskueligt, som vi kan bruge videre. Derfor gik vi direkte til pandas i stedet for først at prøve noget andet. Det gik også nemt, fordi `data_loader.py` allerede var færdig og gav os en liste med dictionaries, som pandas kan gøre til en tabel med det samme.
+
+### build_table()
+
+Funktionen henter loglinjerne med `load_logs()`, parser dem med `parse_logs()` og laver en DataFrame ud af resultatet. Hver loglinje bliver til en række, og felterne (`timestamp`, `level`, `event` osv.) bliver til kolonner med overskrifter.
+
+Bagefter laver vi to konverteringer, så data ikke bare er tekst (strings), når vi skal lave grafer:
+
+- `timestamp` bliver lavet om til datetime med `pd.to_datetime()`.
+- `dest_port` bliver lavet om til et tal med `pd.to_numeric(..., errors="coerce")`.
+
+`errors="coerce"` bestemmer, hvad der sker, hvis en værdi ikke kan laves om til et tal. Uden den stopper programmet med en fejl. Med den bliver værdien i stedet til en tom værdi (`<NA>`), og resten af tabellen virker stadig som normalt.
+
+### Første eller seneste 20 linjer
+
+Til visningen bruger vi `head()` og `tail()`. De er basale funktioner, som også findes i Linux, og dem kendte vi i forvejen, så det gav god mening at bruge dem. `show_table()` viser de første 20 linjer, og `show_latest()` viser de seneste 20. Begge bruger `to_string(index=False)`, så pandas ikke skjuler kolonner med `...`, og så det ekstra rækkenummer ikke kommer med.
+
+I `main.py` spørger menupunkt 1, om man vil se de første eller de seneste 20 (`f` eller `l`). Tabellen bygges kun én gang, når programmet starter, og bruges derefter af resten af menuen.
+
+### Fejlhåndtering og test
+
+Vi har testet, hvad der sker, hvis logfilen ikke findes. `load_logs()` returnerer så `None`, `build_table()` returnerer også `None`, og `main.py` skriver "No logs found" og stopper uden at crashe. Vi har også testet, at ugyldige loglinjer ikke kommer med i tabellen. De bliver sorteret fra i `parse_logs()`, før tabellen bliver lavet.
+
+*[Screenshot: tabel med de første 20 linjer]*
+<!-- ![Tabel første 20](screenshots/table-first.png) -->
+
+*[Screenshot: tabel med de seneste 20 linjer]*
+<!-- ![Tabel seneste 20](screenshots/table-latest.png) -->
+
+### Refleksion
+
+Vi har arbejdet på det sammen og hjulpet hinanden. Set i bakspejlet kunne vi godt have overvejet en SQL-database i stedet for en tabel i `table_view.py`. Så kunne vi have brugt SQL-queries, især til søgning og filtrering, og det kunne have gjort det lettere og mere enkelt at hente data.
 
 </details>
 
@@ -276,3 +311,8 @@ Testet ved brug af en misdannet del (`level INFO`) uden `=`-tegn.
 ## Forbedringsmuligheder
 
 > **Mangler:** Eventuelle forbedringsmuligheder.
+
+
+## Kilder
+
+- Claude (Anthropic, AI-assistent): Vi har brugt Claude som hjælp til at strukturere README-filen og til at få overblik over, hvad vi skulle skrive under de forskellige punkter. Indholdet bygger på vores eget arbejde og vores egne svar, hvor vi evt. har kunnet bede Claude som at stille os nogle spørgsmål, som vi ville besvare for at den så kunne skrive det med vores ord.
