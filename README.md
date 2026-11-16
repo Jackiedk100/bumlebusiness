@@ -485,11 +485,19 @@ Vi kunne godt have været bedre til at fortælle hinanden, hvad vi havde lavet. 
 
 ## Resultater
 
-> **Mangler:** En opsummering af det færdige projekt og de vigtigste resultater.
+Vi har udviklet et Python-program, der indlæser og parser Bumle Business' VPN-sikkerhedslogs og gør dem nemme at analysere. 
+Programmet kan vise loggen som en tabel, filtrere på level, status og tidsrum, søge på IP, user og event, opdage brute force-angreb og visualisere data med grafer. 
+Fejlhåndtering sikrer, at forkert input eller ugyldige loglinjer ikke får programmet til at crashe.
+
+Projektet blev styret med Scrum: user stories med acceptkriterier, tasks på et task board og samarbejde via GitHub. 
+Det gav overblik over, hvem der lavede hvad, og gjorde det nemt at dele kode.
 
 ## Forbedringsmuligheder
 
-> **Mangler:** Eventuelle forbedringsmuligheder.
+- Flere tests, f.eks. automatiske tests med `unittest` eller `pytest`.
+- Mulighed for at indlæse andre logfiler end den ene eksempelfil.
+- Brute force-grænsen (5 forsøg / 5 minutter) kunne gøres justerbar af brugeren.
+- Bedre brug af branches og pull requests i GitHub, så vi undgår merge-konflikter.
 
 
 ## Kilder
