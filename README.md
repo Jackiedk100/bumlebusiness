@@ -10,17 +10,33 @@ Dette er vores Github project, hvor vi skal bruge SCRUM og indlæse, vise, analy
 ### Sprint
 
 *[Screenshot: sprintplan]*
-<!-- ![Sprintplan](screenshots/sprint.png) -->
+![Sprintplan](screenshots/sprint.png)
 
 ### User Stories
 
 *[Screenshot: User Stories]*
-<!-- ![User Stories](screenshots/user-stories.png) -->
+![User Stories](screenshots/user-stories.png)
 
 ### Tasks
 
 *[Screenshot: Tasks i ScrumWise]*
 <!-- ![Tasks](screenshots/tasks.png) -->
+*Liste over vores Tasks i Scrumwise*
+**US1: Indlæsning af rå VPN-logfiler**
+- Opret python fil til filhåndtering.
+- Opret funktion til indlæsning af logfil, cyber_security_log_sample.txt.
+- Verificer at alle rækker og kolonner er blevet indlæst.
+
+**US2: Robust fejlhåndtering ved fil- og datafejl**
+- Tilføj try-except i data_loader.py.
+- Test programmet med en ugyldig filsti og manglende fil.
+
+**US3: Struktureret tabelvisning af logdata**
+- Implementér formatering vha. f.eks. tabulate eller indbygget Pandas print.
+- Opret visningsfunktion.
+
+**US4: Sikkerhedsfiltrering og søgning i logdata**
+- 
 
 ### Acceptkriterier
 
