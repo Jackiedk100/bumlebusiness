@@ -4,8 +4,13 @@ Dette er vores Github project, hvor vi skal bruge SCRUM og indlæse, vise, analy
 
 ## Introduktion
 
-> **Mangler:** En kort beskrivelse af projektet, dets formål og den problemstilling, det skal løse.
-
+Bumle Business har VPN sikkerhedslogs, og vi har lavet et program der indlæser, viser,
+analysere, og visualiserer dem.
+Problemstillingen ved opgaven, er logfilen har 541 linjer og det er svært og langsomt
+at finde mistænkelig aktivitet manuelt. Så formålet med opgaven er, at gøre det nemt at
+filtrere og søge for, at finde mislykkede logins, blokerede forsøg og bestemt IP'er
+så man hurtigt kan opdage angreb.
+Projektet er lavet via pycharm, VS Code, og Scrum.
 
 ## SCRUM
 
