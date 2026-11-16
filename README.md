@@ -2,9 +2,61 @@
 Dette er vores Github project, hvor vi skal bruge SCRUM og indlæse, vise, analysere og visualisere logs
 
 
+## Introduktion
+
+
+## SCRUM
+
+### Sprint
+
+*[Screenshot: sprintplan]*
+<!-- ![Sprintplan](screenshots/sprint.png) -->
+
+### User Stories
+
+*[Screenshot: User Stories]*
+<!-- ![User Stories](screenshots/user-stories.png) -->
+
+### Tasks
+
+*[Screenshot: Tasks i ScrumWise]*
+<!-- ![Tasks](screenshots/tasks.png) -->
+
+### Acceptkriterier
+
+*[Screenshot: Acceptkriterier i ScrumWise]*
+<!-- ![Acceptkriterier](screenshots/acceptkriterier.png) -->
+
+### Task Board
+
+*[Screenshot: Task Board i starten af sprintet]*
+<!-- ![Task Board start](screenshots/taskboard-start.png) -->
+
+*[Screenshot: Task Board midt i sprintet]*
+<!-- ![Task Board midt](screenshots/taskboard-midt.png) -->
+
+*[Screenshot: Task Board til sidst, alle opgaver i Done]*
+<!-- ![Task Board slut](screenshots/taskboard-slut.png) -->
+
+### Sammenhængen mellem User Stories, Tasks, Acceptkriterier og Task Board
+
+
 ## Kom i gang
 
-Kræver Python 3. Kør følgende i projektets rodmappe:
+Kræver Python 3. Kør kommandoerne i projektets rodmappe.
+
+**Windows (PowerShell eller Kommandoprompt)**
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python main.py
+```
+
+Hvis PowerShell blokerer aktiveringen, kan du køre `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` og prøve igen.
+
+**macOS og Linux**
 
 ```bash
 python3 -m venv .venv
@@ -13,14 +65,20 @@ pip install -r requirements.txt
 python main.py
 ```
 
-På Windows aktiveres miljøet med `.venv\Scripts\activate` i stedet for `source .venv/bin/activate`.
+Hvis `python` ikke findes på macOS eller Linux, så brug `python3 main.py`.
+
+Når du er færdig, kan du afslutte det virtuelle miljø med `deactivate`.
 
 
-# Data Loader – Udvikling og implementering
+## Udviklingsproces
+
+<details>
+<summary><b>Data Loader – Udvikling og implementering</b> (klik for at åbne)</summary>
+
 
 Denne sektion beskriver udviklingen af `data_loader.py`-modulet, inklusive implementeringsvalg, parsingmetoder, fejlhåndtering og udførte tests.
 
-## 1. Indledende opsætning og fillæsning
+### 1. Indledende opsætning og fillæsning
 
 Oprettede `data_loader.py`-modulet til at håndtere læsningen og processeringen af de rå VPN-sikkerhedslogs.
 
@@ -33,11 +91,11 @@ Oprettede `data_loader.py`-modulet til at håndtere læsningen og processeringen
 
 De indledende tests bekræftede, at filen indeholdt 541 loglinjer.
 
-## 2. Log parsing og dataudtræk
+### 2. Log parsing og dataudtræk
 
 Udviklede `parse_log()`-funktionen til at konvertere de rå loglinjer til en struktureret Python dictionary.
 
-### Den indledende opsætning med `split()`:
+#### Den indledende opsætning med `split()`:
 
 Oprindeligt blev der eksperimenteret med Pythons indbyggede `split()`-funktion til at separere en loglinje i de individuelle felter.
 
@@ -49,7 +107,7 @@ For eksempel:
 
 Ved at bruge `split()` ville denne besked blive opdelt i flere forskellige dele og derved gøre dataanalyse og opdelingen uholdbar i længden.
 
-### Implementeringen af `shlex`:
+#### Implementeringen af `shlex`:
 
 For at løse problemstillingen med `msg`-delen af loglinjerne blev `shlex`, som er et standardbibliotek, implementeret.
 
@@ -57,7 +115,7 @@ For at løse problemstillingen med `msg`-delen af loglinjerne blev `shlex`, som 
 - Erstattede `split()` med `shlex.split()`.
 - Verificering blev udført og bekræftede, at beskeden med anførselstegn og mellemrum nu blev bevaret som et enkelt element.
 
-### Strukturen af dictionary
+#### Strukturen af dictionary
 
 Efter opdelingen af de individuelle logdele:
 
@@ -68,7 +126,7 @@ Efter opdelingen af de individuelle logdele:
 
 Tidsstemplet blev håndteret separat, da det ikke følger den samme procedure for key og value-struktur som de resterende logdele.
 
-## 3. Håndtering af flere loglinjer samtidig
+### 3. Håndtering af flere loglinjer samtidig
 
 Efter at have opnået en succesfuld parsing af individuelle loglinjer implementerede jeg processen til at håndtere hele filen.
 
@@ -82,11 +140,11 @@ Denne ændring gjorde, at programmet kunne holde styr på individuelle linjenumr
 
 Nummereringen med `enumerate()` starter med 1 for at matche linjenumrene i logfilen i stedet for Pythons default 0-baserede indeksering.
 
-## 4. Exception-håndtering og fejlvalidering
+### 4. Exception-håndtering og fejlvalidering
 
 Den oprindelige implementering blev udvidet til at håndtere manglende filer og misdannede logindtastninger.
 
-### 4.1 Filindlæsning og exception-håndtering
+#### 4.1 Filindlæsning og exception-håndtering
 
 Tilføjede `try/except`-håndtering til `load_logs()`.
 
@@ -99,7 +157,7 @@ Testet ved midlertidigt at fejltaste filnavnet til en ikke-eksisterende fil.
 
 **Resultat:** Fejlen blev fanget, en passende besked blev vist, og programmet afsluttede uden nogen fejl.
 
-### 4.2 Tomme logindtastninger
+#### 4.2 Tomme logindtastninger
 
 Tilføjede verificering ved at bruge:
 
@@ -115,7 +173,7 @@ Dette er blevet testet ved midlertidigt at indsætte en tom linje i loglisten.
 
 **Resultat:** Den tomme linje blev identificeret ved (som eksempel) linje 3, og de resterende linjer blev processeret korrekt og med succes.
 
-### 4.3 Tidsstempelvalidering
+#### 4.3 Tidsstempelvalidering
 
 Oprindeligt blev tidsstempelverificeringen udført ved brug af et check på de første 4 værdier ved hjælp af `.isdigit()`.
 
@@ -135,7 +193,7 @@ Testet ved brug af en ugyldig datoindtastning.
 
 **Resultat:** Det ugyldige tidsstempel blev korrekt identificeret og afvist.
 
-### 4.4 Key-Value-validering
+#### 4.4 Key-Value-validering
 
 Tilføjede validering for at sikre, at hver del efter tidsstemplet indeholder et `=`-tegn.
 
@@ -161,3 +219,32 @@ Testet ved brug af en misdannet del (`level INFO`) uden `=`-tegn.
 
 
 
+
+
+</details>
+
+<details>
+<summary><b>Table View – Udvikling og implementering</b> (klik for at åbne)</summary>
+
+</details>
+
+<details>
+<summary><b>Analyzer – Udvikling og implementering</b> (klik for at åbne)</summary>
+
+</details>
+
+<details>
+<summary><b>Visualization – Udvikling og implementering</b> (klik for at åbne)</summary>
+
+</details>
+
+<details>
+<summary><b>Main – Udvikling og implementering</b> (klik for at åbne)</summary>
+
+</details>
+
+# Konklusion
+
+## Resultater
+
+## Forbedringsmuligheder
