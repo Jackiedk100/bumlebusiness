@@ -102,3 +102,22 @@ def plot_activity_over_time(df):
         plt.show()
     except Exception as error:
         print(f"Could not draw line chart: {error}")
+
+# US6: Line chart - failed logins per minute for IPs flagged as brute force
+def plot_brute_force(df, suspects):
+    try:
+        # Keep only failed logins from the flagged IPs
+        failed = df[(df["event"] == "LOGIN_FAILED") & (df["src_ip"].isin(suspects["src_ip"]))]
+        # Count per minute, one line per IP
+        per_minute = failed.groupby([failed["timestamp"].dt.floor("min"), "src_ip"]).size().unstack(fill_value=0)
+        per_minute.plot(marker="o")
+
+        plt.title("Failed logins per minute (suspected brute force)")
+        plt.xlabel("Time")
+        plt.ylabel("Number of failed logins")
+        plt.legend(title="Source IP")
+        plt.tight_layout()
+        plt.show()
+    except Exception as error:
+        print(f"Could not draw brute force chart: {error}")
+

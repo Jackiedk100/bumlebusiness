@@ -19,6 +19,11 @@ def build_table():
     return df
 
 
-def show_table(df, rows=10):
+def show_table(df, rows=20):
     # to_string() prevents pandas from cutting off columns with "..."
     print(df.head(rows).to_string(index=False))
+
+
+# Show the latest log entries (the last rows of the table)
+def show_latest(df, rows=20):
+    print(df.tail(rows).to_string(index=False))
