@@ -314,7 +314,57 @@ Vi har arbejdet på det sammen og hjulpet hinanden. Set i bakspejlet kunne vi go
 <details>
 <summary><b>Main – Udvikling og implementering</b> (klik for at åbne)</summary>
 
-> **Mangler:** Hvad `main.py` gør, og hvordan det binder modulerne sammen i en menu (US7: hele programmet startes fra `main.py`). Skriv også om, hvordan I har arbejdet med US8 og US9 (Task Board, GitHub og README).
+`main.py` er det program, man starter, og det binder alle modulerne sammen i en menu. Det løser US7, hvor hele programmet skal kunne startes fra `main.py`.
+
+### Opbygning af main.py
+
+Det var første gang, vi havde en `main.py`, så vi skulle lige finde ud af, hvordan den bruges. Den første version var en helt simpel menu, der bare printede "hi". Da `table_view.py` var lavet, tilføjede vi "Show table", og da `analyzer.py` og `visualization.py` var færdige, kom de også med i menuen.
+
+Menuen ser sådan ud:
+
+1. Show table
+2. Scatter plot - log levels per IP
+3. Bar chart - status per source IP
+4. Line chart - activity over time
+5. Scatter plot - IP activity vs. failed share
+6. Search in log
+7. Detect brute force
+8. Filter log
+0. Exit
+
+### Valg
+
+Vi valgte en menu med tal i stedet for, at brugeren skal skrive navnet på en funktion. Det er hurtigere og mere brugervenligt, og der er mindre chance for fejl. Hvis man skal skrive et ord, kan man fx komme til at skrive med store bogstaver, og det kan man ikke med tal.
+
+Tabellen bygges kun én gang i starten af `main()` og bruges af alle menupunkterne. Dataen ændrer sig ikke undervejs, så der er ingen grund til at bygge den igen for hver handling.
+
+Vi har delt koden ud i flere filer, så det er mere overskueligt. `main.py` kalder bare modulerne (`table_view`, `analyzer` og `visualization`), og selve arbejdet sker i hver sin fil. Det gjorde det også nemmere at fordele opgaverne, fordi hver af os kunne arbejde i sin egen fil.
+
+Menupunkt 7 (brute force) kører flere trin efter hinanden: først finder den de mistænkelige IP'er, så viser den alle forsøgene, og til sidst tegner den et diagram. Vi samlede det i ét punkt, så man får hele analysen og resultatet på en gang.
+
+### Problemer og fejlhåndtering
+
+Vi opdagede, at graferne åbner i deres egne vinduer, og at man skal lukke dem, før programmet kan fortsætte.
+
+Hvis man taster noget, der ikke er i menuen, får man "Invalid choice, please try again", og menuen vises igen. Hvis loggen ikke kan findes, skriver programmet "No logs found" og stopper.
+
+### Test
+
+Der er ikke så meget at teste i `main.py` udover brugerinput, så det er det, vi har testet, og det bliver håndteret.
+
+### US8: Task Board og GitHub
+
+Vi brugte Task Boardet, før vi gik i gang med hver task. Vi rykkede alle selv de opgaver, vi var i gang med, og en task kom først i Done, når vi kunne sige ja til acceptkriterierne.
+
+På GitHub har vi arbejdet i det samme repository. De fleste af os har committet direkte til `main`, og når nogen havde lavet ændringer, mens andre også arbejdede, blev de samlet med et merge. `analyzer.py` blev lavet i en separat branch og kom ind i `main` med en pull request (#1).
+
+### US9: README
+
+Vi fordelte README'en, så hver især skrev om den del, de selv havde lavet. Derar lavede introduktionen og skrev om `analyzer.py`. Freija tog SCRUM og skrev om `visualization.py`. Dennis skrev om `data_loader.py`, som han havde lavet, og Jackie tog `main.py` og `table_view.py`.
+
+### Refleksion
+
+Vi kunne godt have været bedre til at fortælle hinanden, hvad vi havde lavet. Scrum-møder ville have givet os bedre indsigt i, hvad de andre arbejdede på.
 
 </details>
 
