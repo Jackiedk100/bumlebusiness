@@ -502,6 +502,8 @@ Vi kunne godt have været bedre til at fortælle hinanden, hvad vi havde lavet. 
 </details>
 
 # Konklusion
+Vi har nået vores mål: programmet gør det nemt og hurtigt at finde mistænkelig aktivitet i Bumle Business' VPN-logs. 
+Undervejs har vi lært at arbejde med Scrum og samarbejde via GitHub.
 
 ## Resultater
 
