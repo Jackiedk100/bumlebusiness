@@ -305,7 +305,39 @@ Vi har arbejdet på det sammen og hjulpet hinanden. Set i bakspejlet kunne vi go
 <details>
 <summary><b>Analyzer – Udvikling og implementering</b> (klik for at åbne)</summary>
 
-> **Mangler:** Hvad `analyzer.py` gør, og hvordan US4 er løst (filtrering på status, IP og tidsrum, søgning på IP/bruger/event, brute force-detektion). Skriv også om valg, funktioner og fejlhåndtering.
+### 1. Formål
+
+`analyzer.py` løser US4 og gør det nemt og hurtigt at finde angreb og mislykkede logins i logfilen. 
+Man kan søge på IP, user eller event, filtrere på status, level og tidsrum og opdage brute force-angreb. 
+Resultaterne vises i en tabel, så man slipper for at gennemgå alle 541 linjer manuelt.
+
+Vi valgte pandas, fordi en DataFrame gør det nemt at filtrere og søge i mange rækker på én gang, og vi genbruger `table_view`, så alle tabeller vises ens.
+
+### 2. Filtrering
+
+- `filter_by_level()` viser kun WARN og ALERT.
+- `filter_failed_events()` viser kun FAILED og BLOCKED.
+- `filter_by_status()` og `filter_by_time_range()` filtrerer på én status eller et tidsrum.
+
+Filtrene bruger pandas' `.isin()`. Ugyldig dato eller status giver en fejlbesked i stedet for et crash (`try/except`).
+
+**Resultat:** Filtrene viste de rigtige logs, og ugyldigt input blev håndteret.
+
+### 3. Søgning
+
+- `SEARCH_COLUMNS` kobler menuvalg 1–3 til `src_ip`, `user` og `event`.
+- `search_logs()` søger i én kolonne, `search_all()` i alle tre.
+- Søgningen bruger nøgleord (`.str.contains`), så en del af ordet er nok, og store/små bogstaver er ligegyldige.
+
+Ukendt kolonne, ugyldigt menuvalg og ingen resultater giver en besked i stedet for et crash.
+
+**Resultat:** Søgningen fandt de rigtige logs.
+
+### 4. Brute force-detektion
+
+`find_brute_force()` finder IP'er med mindst 5 mislykkede logins inden for 5 minutter.
+
+**Resultat:** IP `203.0.113.250` blev fundet med 18 forsøg mod `vpn01` på ca. 3,5 minutter.
 
 </details>
 
