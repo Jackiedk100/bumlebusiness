@@ -27,12 +27,20 @@ Projektet er lavet via pycharm, VS Code, og Scrum.
 
 **User Stories beskriver hvad brugere har brug for og hvorfor. I projektet bruges de til at bestemme hvad der skal bygges.**
 
+<details>
+<summary>Vis User Stories (klik for at åbne)</summary>
+
 *[Screenshot: User Stories]*
 ![User Stories](screenshots/user-stories.png)
+
+</details>
 
 ### Tasks
 
 **Tasks er små opgaver som en User Story deles op i. En User Story er færdig når de tilhørende tasks er løst.**
+
+<details>
+<summary>Vis tasks (klik for at åbne)</summary>
 
 *Liste over vores Tasks i Scrumwise*
 
@@ -83,10 +91,15 @@ Projektet er lavet via pycharm, VS Code, og Scrum.
 - Skriv README.md med fokus på introduktion, metodeforklaring og konklusion.
 - Verificer at linket virker og alt indhold er til stede.
 
+</details>
+
 
 ### Acceptkriterier
 
 **Acceptkriterier er tydelige krav som gør det klart hvornår opgaven er løst.**
+
+<details>
+<summary>Vis acceptkriterier (klik for at åbne)</summary>
 
 *Liste over vores acceptkriterier i Scrumwise*
 
@@ -137,16 +150,23 @@ Projektet er lavet via pycharm, VS Code, og Scrum.
 - Oprettet et offentligt GitHub-repo med kildekode og cyber_security_log_sample.txt.
 - README.md indeholder de tre krævede hovedafsnit: Introduktion, SCRUM (forklaring af US, Tasks, Acceptkriterier, Task Board og sammenhæng) og Konklusion.
 
+</details>
+
 
 ### Task Board
 
 **Task Board er en tavle hvor man kan holde styr på alle sine Tasks. De bliver flyttet rundt fra To Do, In Progress til Done alt efter når de bliver løst.**
+
+<details>
+<summary>Vis Task Board (klik for at åbne)</summary>
 
 *[Screenshot: Task Board billede 1]*
 ![Task Board start](screenshots/taskboard-1.png)
 
 *[Screenshot: Task Board billede 2]*
 ![Task Board midt](screenshots/taskboard-2.png)
+
+</details>
 
 
 ### Sammenhængen mellem User Stories, Tasks, Accheptkriterier og Task Board
