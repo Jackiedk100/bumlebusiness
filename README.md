@@ -582,7 +582,7 @@ Samtidig skulle projektet styres med Scrum. Det mål har vi nået. Programmet d�
 | Filtrering og søgning efter mistænkelig aktivitet | Ja (ekstra) | US4 |
 | SCRUM: User Stories, ét Sprint og Task Board | Ja | US8 |
 | GitHub-repository og README.md | Ja | US9 |
-| `.slash/.remember/config/` med YAML-fil | Ja | – |
+
 
 Hvordan hvert krav er løst, er beskrevet i afsnittene om de enkelte moduler og om SCRUM ovenfor.
 
@@ -607,15 +607,17 @@ Vores anbefaling til Bumle Business er at blokere de to IP-adresser og tjekke de
 
 ## Forbedringsmuligheder
 
-- **Flere tests:** Automatiske tests med `unittest` eller `pytest`, så vi ikke kun tester manuelt.
-- **Andre logfiler:** Mulighed for at vælge en anden logfil end den ene eksempelfil.
-- **Justerbar brute force-grænse:** Grænsen på 5 forsøg inden for 5 minutter kunne vælges af brugeren.
-- **Database:** En SQL-database i stedet for en tabel i hukommelsen ville gøre det lettere at søge i store logs.
-- **Bedre brug af GitHub:** Flere branches og pull requests, så vi undgår merge-konflikter.
-- **Bedre brug af Scrum:** Korte daglige Scrum-møder, så vi havde bedre overblik over hinandens arbejde.
+## Forbedringsmuligheder
 
-Samlet set har vi lavet et program, der løser Bumle Business' problem: det gør det muligt at finde og undersøge mistænkelig VPN-aktivitet, og det har allerede fundet to angreb i deres log.
+- **Fast testplan:** Vi testede programmet ved at køre det manuelt og tjekke, om resultatet var rigtigt, som beskrevet under "Testet ved" i hvert afsnit. Det virkede, men hver person testede på sin egen måde, og vi skrev ikke altid ned, hvad vi forventede at se. Næste gang ville vi lave en fast testplan med hvad der testes, hvilket input der bruges og hvad resultatet skal være. Fx: "Søg på IP 203.0.113.250 – forventet resultat: 18 linjer med FAILED." Så kan alle i gruppen teste på samme måde, og vi kan teste det hele igen, når nogen ændrer i koden.
 
+- **Valg af logfil:** Programmet læser i dag kun cyber_security_log_sample.txt, fordi filnavnet står fast i koden. Det var nok til opgaven, men i virkeligheden får Bumle Business nye logs hele tiden. Hvis brugeren selv kunne skrive filnavnet med input(), kunne programmet bruges på alle deres logfiler. Vores fejlhåndtering med try/except gør allerede, at en forkert fil giver en fejlbesked i stedet for et crash, så det ville være en lille ændring.
+
+- **Justerbar brute force-grænse:** find_brute_force() bruger faste værdier: mindst 5 mislykkede logins inden for 5 minutter. Det fandt angrebet fra 203.0.113.250, men en angriber, der går langsommere, ville ikke blive fundet. Hvis brugeren selv kunne vælge antal forsøg og tidsrum, kunne programmet tilpasses til forskellige situationer.
+
+- **Bedre brug af GitHub:** Vi arbejdede alle direkte i main. Flere gange blev et push afvist, fordi en anden havde pushet lige før, og vi brugte tid på at rette det. Vi lærte, at man altid skal lave pull, før man begynder at skrive, og igen før man pusher. Gør vi det fast fra starten næste gang, undgår vi de fleste af problemerne.
+
+- **Bedre brug af Scrum:** Vi brugte user stories, acceptkriterier og Task Board, men vi holdt ikke daglige Scrum-møder. Derfor vidste vi ikke altid, hvad de andre arbejdede på, og nogle ting blev først opdaget sent. Et kort Daily Scrum, hvor hver person siger hvad de har lavet, hvad de laver nu og hvad der stopper dem, ville have givet bedre overblik og gjort det lettere at hjælpe hinanden.
 
 ## Kilder
 
