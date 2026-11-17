@@ -440,7 +440,68 @@ Ukendt kolonne, ugyldigt menuvalg og ingen resultater giver en besked i stedet f
 <details>
 <summary><b>Visualization – Udvikling og implementering</b> (klik for at åbne)</summary>
 
-> **Mangler:** Hvad `visualization.py` gør, og hvordan US5 og US6 er løst (scatter plots, søjle- og linjediagrammer, diagrammer med titel, akser og signaturforklaring). Skriv også om, hvilke sammenhænge i logfilen I fandt, og hvorfor I valgte netop de diagramtyper.
+`visualization.py` laver graferne i programmet og løser US5 (scatter plots) og US6 (søjle- og linjediagrammer). Graferne åbnes fra menuen i `main.py` (punkt 2–5).
+
+### 1. Valg af matplotlib
+
+Vi havde lige lært om plotly og matplotlib i undervisningen, så det virkede oplagt at bruge det i opgaven. Jeg valgte at bruge matplotlib, og det fungerede rigtig godt.
+
+### 2. Overblik over data
+
+Logfilen var svær at finde rundt i, fordi den har over 500 linjer. Jeg startede derfor med at kigge efter nøgleord for at få et overblik over, hvad der var i loggen.
+
+### 3. Scatter plots (US5)
+
+#### Første forsøg: én prik pr. loglinje
+
+Mine første scatter plots havde én prik for hver linje i loggen. Jeg prøvede blandt andet:
+
+- tid vs. kilde-IP
+- tid vs. aktivitet (antal loglinjer pr. 10 minutter)
+- tid vs. destinationsport
+
+Problemet med disse forsøg var, at der var for mange prikker, og at plottene virkede uoverskuelige. Desuden syntes jeg ikke, at de viste vigtig information i forhold til andre mulige plots.
+
+Tid vs. destinationsport viste heller ingen sammenhæng, fordi `INFO`, `WARN` og `ALERT` var spredt ud over alle porte og hele døgnet. Det viser, at angrebene ikke er knyttet til en bestemt port.
+
+#### Løsningen: én prik pr. IP
+
+I stedet samlede jeg data pr. IP-adresse med pandas' `groupby()`, så hver prik er én IP. Så gik det fra flere hundrede prikker til 14, og det blev meget mere overskueligt.
+
+De to scatter plots i programmet er:
+
+- **`plot_scatter_levels_per_ip()`** viser antallet af `INFO`, `WARN` og `ALERT` for hver IP, med én farve pr. level.
+- **`plot_scatter_ip_activity()`** viser antallet af loglinjer fra hver IP (x-akse) mod hvor mange procent af dem, der er `FAILED` eller `BLOCKED` (y-akse). IP'er med over 50 % bliver vist med rødt og får deres IP-adresse skrevet ved siden af.
+
+Jeg havde også et plot med tiden mellem hændelserne for hver IP, men det fjernede jeg igen for at gøre det mere overskueligt.
+
+### 4. Søjle- og linjediagram (US6)
+
+- **`plot_status_per_ip()`** er et stablet søjlediagram, der viser `OK`, `FAILED` og `BLOCKED` for hver IP.
+- **`plot_activity_over_time()`** er et linjediagram, der viser antal loglinjer pr. time, med én linje pr. level.
+
+Jeg valgte søjle- og linjediagrammer, fordi de er overskuelige og pæne at se på, især fordi de er delt op i farver. Så kan man hurtigt se, hvilke IP'er der skiller sig ud, og hvornår der sker noget.
+
+### 5. Opbygning og fejlhåndtering
+
+Alle funktionerne er bygget op på samme måde: de tæller data med `groupby()`, tegner grafen og sætter titel, akse-labels og signaturforklaring på, som acceptkriterierne i US5 kræver.
+
+Hver funktion har en `try/except`, så programmet ikke crasher, hvis der fx mangler en kolonne i data. I stedet bliver der skrevet en fejlbesked, og man kommer tilbage til menuen.
+
+### 6. Test og resultater
+
+Der var meget trial and error med, hvordan de forskellige grafer skulle se ud. Jeg testede dem med logfilen og ændrede dem, indtil de var overskuelige og viste noget brugbart.
+
+**Resultat:** Graferne viser tydeligt de problemer, vi fandt i loggen:
+
+- IP `203.0.113.250` har 18 mislykkede logins mod `vpn01` på ca. 3,5 minut, og alle forsøg fejlede. Det er det samme brute force-angreb, som `analyzer.py` fandt.
+- IP `198.51.100.200` blev blokeret 3 gange for malware lige efter.
+- I scatter plottet ligger de to IP'er helt for sig selv med 100 % fejlede eller blokerede forsøg, mens de normale IP'er ligger på 12–41 %. De har heller ingen normal `INFO`-aktivitet.
+- I linjediagrammet ses angrebet som en pludselig top i `WARN` til sidst i loggen.
+
+### 7. Refleksion
+
+Hvis jeg skulle gøre det igen, ville jeg lave en plan fra starten om, hvordan graferne skulle se ud. Så havde jeg kunnet springe nogle af forsøgene over og været hurtigere færdig.
 
 </details>
 
