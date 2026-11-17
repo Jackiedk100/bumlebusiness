@@ -609,8 +609,6 @@ Vores anbefaling til Bumle Business er at blokere de to IP-adresser og tjekke de
 
 ## Forbedringsmuligheder
 
-## Forbedringsmuligheder
-
 - **Fast testplan:** Vi testede programmet manuelt ved at køre det og tjekke resultatet, som beskrevet under "Testet ved" og "Resultat" i hvert afsnit. Testene blev lavet af den, der havde skrevet modulet, og blev beskrevet forskelligt. Næste gang ville vi lave en fælles testplan med hvad der testes, hvilket input der bruges og hvad resultatet skal være. Fx: "Brute force-analyse – forventet resultat: IP 203.0.113.250 med 18 mislykkede logins." Så kan alle i gruppen teste på samme måde, og vi kan teste det hele igen, når nogen ændrer i koden.
 
 - **Valg af logfil:** Programmet læser i dag kun cyber_security_log_sample.txt, fordi stien står fast i koden (LOG_FILE_PATH i data_loader.py). Det var nok til opgaven, men i virkeligheden får Bumle Business nye logs hele tiden. Hvis brugeren selv kunne skrive filnavnet med input(), kunne programmet bruges på alle deres logfiler. Vores try/except i load_logs() gør allerede, at en forkert fil giver en fejlbesked i stedet for et crash, så det ville være en lille ændring.
