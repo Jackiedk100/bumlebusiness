@@ -23,6 +23,10 @@ Projektet er lavet via pycharm, VS Code, og Scrum.
 *[Screenshot: sprintplan]*
 ![Sprintplan](screenshots/sprint.png)
 
+**Burndown-chart for Sprint 1.** Grafen viser, hvor mange timers arbejde der var tilbage hver dag (grøn linje) i forhold til den ideelle fremdrift (stiplet linje).
+
+![Burndown-chart](screenshots/burndown-chart.png)
+
 ### User Stories
 
 **User Stories beskriver hvad brugere har brug for og hvorfor. I projektet bruges de til at bestemme hvad der skal bygges.**
@@ -585,6 +589,14 @@ Samtidig skulle projektet styres med Scrum. Det mål har vi nået. Programmet d�
 
 
 Hvordan hvert krav er løst, er beskrevet i afsnittene om de enkelte moduler og om SCRUM ovenfor.
+
+## Sprintet
+
+Vi gennemførte projektet i ét Sprint fra 5/11 til 17/11. Burndown-chartet viser, at vi startede med ca. 33 timers arbejde, og at der var 0 timer tilbage ved sprintets afslutning.
+
+![Burndown-chart](screenshots/burndown-chart.png)
+
+Linjen ligger over den ideelle linje i starten af sprintet. Der var næsten ingen fremdrift 5/11 til 6/11, fordi vi først planlagde, oprettede Task Boardet og kom i gang. Den 12/11 falder linjen kraftigt, fordi flere tasks blev lukket samme dag, og derefter følger den den ideelle linje til 0. Grafen viser altså, at vi nåede i mål, men at arbejdet var ujævnt fordelt, og at vi lukkede tasks i klumper i stedet for løbende. Det hænger sammen med, at vi kunne have været bedre til at opdatere Task Boardet og fortælle hinanden, hvad vi lavede.
 
 ## Vigtigste resultater
 
