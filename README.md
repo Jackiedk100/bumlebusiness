@@ -563,24 +563,58 @@ Vi kunne godt have været bedre til at fortælle hinanden, hvad vi havde lavet. 
 </details>
 
 # Konklusion
-Vi har nået vores mål: programmet gør det nemt og hurtigt at finde mistænkelig aktivitet i Bumle Business' VPN-logs. 
-Undervejs har vi lært at arbejde med Scrum og samarbejde via GitHub.
 
-## Resultater
+Bumle Business havde opdaget mistænkelig aktivitet på nogle af sine servere og havde mistanke om, at uvedkommende var kommet ind via VPN-forbindelsen. 
+De ønskede en løsning, der kunne gemme og præsentere logdata med tabeller og diagrammer, så mistænkelig aktivitet lettere kan findes og undersøges.
 
-Vi har udviklet et Python-program, der indlæser og parser Bumle Business' VPN-sikkerhedslogs og gør dem nemme at analysere. 
-Programmet kan vise loggen som en tabel, filtrere på level, status og tidsrum, søge på IP, user og event, opdage brute force-angreb og visualisere data med grafer. 
-Fejlhåndtering sikrer, at forkert input eller ugyldige loglinjer ikke får programmet til at crashe.
+Vores mål var derfor at lave et Python-program, der kan indlæse virksomhedens VPN-log, vise den overskueligt, analysere den og visualisere den. 
+Samtidig skulle projektet styres med Scrum. Det mål har vi nået. Programmet dækker alle kravene i opgaven, og vigtigst af alt fandt det konkrete angreb i loggen. Mistanken fra Bumle Business var altså berettiget.
 
-Projektet blev styret med Scrum: user stories med acceptkriterier, tasks på et task board og samarbejde via GitHub. 
-Det gav overblik over, hvem der lavede hvad, og gjorde det nemt at dele kode.
+## Har vi løst kravene?
+
+| Krav fra opgaven | Løst? | User Story |
+|---|---|---|
+| Indlæsning af logs | Ja | US1, US2 |
+| Visning af logs i en tabel | Ja | US3 |
+| Analyse af sammenhænge med scatter plots | Ja | US5 |
+| Visualisering med relevante diagrammer | Ja | US6 |
+| Kodestruktur, kommentarer og fejlhåndtering | Ja | US2, US7 |
+| Filtrering og søgning efter mistænkelig aktivitet | Ja (ekstra) | US4 |
+| SCRUM: User Stories, ét Sprint og Task Board | Ja | US8 |
+| GitHub-repository og README.md | Ja | US9 |
+| `.slash/.remember/config/` med YAML-fil | Ja | – |
+
+Hvordan hvert krav er løst, er beskrevet i afsnittene om de enkelte moduler og om SCRUM ovenfor.
+
+## Vigtigste resultater
+
+Det vigtigste resultat er, at programmet fandt to tydelige angreb i Bumle Business' log:
+
+1. **Brute force-angreb:** IP `203.0.113.250` havde 18 mislykkede logins mod `vpn01` på ca. 3,5 minut, og alle forsøg fejlede. Angrebet blev fundet både af `analyzer.py` og i graferne fra `visualization.py`. 
+At to forskellige metoder finder det samme, gør resultatet mere troværdigt.
+2. **Malware:** IP `198.51.100.200` blev blokeret 3 gange for malware lige efter brute force-angrebet.
+
+Begge IP'er havde 100 % fejlede eller blokerede forsøg og ingen normal aktivitet. Det tyder stærkt på, at de er eksterne angribere og ikke almindelige brugere. 
+Vores anbefaling til Bumle Business er at blokere de to IP-adresser og tjekke de brugerkonti, der blev forsøgt logget ind på.
+
+## Hvad vi har lært
+
+- At bruge pandas til at gøre rå data om til en tabel, som er nem at filtrere, søge i og visualisere.
+- At fejlhåndtering med `try/except` gør et program meget mere robust over for forkerte filer og forkert input.
+- At en scatter plot-analyse også kan vise, at der *ikke* er en sammenhæng, og at det også er brugbart.
+- At arbejde med Scrum: dele arbejdet op i user stories og tasks og bruge acceptkriterier til at afgøre, hvornår noget er færdigt.
+- At samarbejde i ét fælles GitHub-repository med commits, merges og pull requests.
 
 ## Forbedringsmuligheder
 
-- Flere tests, f.eks. automatiske tests med `unittest` eller `pytest`.
-- Mulighed for at indlæse andre logfiler end den ene eksempelfil.
-- Brute force-grænsen (5 forsøg / 5 minutter) kunne gøres justerbar af brugeren.
-- Bedre brug af branches og pull requests i GitHub, så vi undgår merge-konflikter.
+- **Flere tests:** Automatiske tests med `unittest` eller `pytest`, så vi ikke kun tester manuelt.
+- **Andre logfiler:** Mulighed for at vælge en anden logfil end den ene eksempelfil.
+- **Justerbar brute force-grænse:** Grænsen på 5 forsøg inden for 5 minutter kunne vælges af brugeren.
+- **Database:** En SQL-database i stedet for en tabel i hukommelsen ville gøre det lettere at søge i store logs.
+- **Bedre brug af GitHub:** Flere branches og pull requests, så vi undgår merge-konflikter.
+- **Bedre brug af Scrum:** Korte daglige Scrum-møder, så vi havde bedre overblik over hinandens arbejde.
+
+Samlet set har vi lavet et program, der løser Bumle Business' problem: det gør det muligt at finde og undersøge mistænkelig VPN-aktivitet, og det har allerede fundet to angreb i deres log.
 
 
 ## Kilder
