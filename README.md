@@ -605,20 +605,21 @@ Vores anbefaling til Bumle Business er at blokere de to IP-adresser og tjekke de
 - At arbejde med Scrum: dele arbejdet op i user stories og tasks og bruge acceptkriterier til at afgøre, hvornår noget er færdigt.
 - At samarbejde i ét fælles GitHub-repository med commits, merges og pull requests.
 
-## Forbedringsmuligheder
+
 
 ## Forbedringsmuligheder
 
-- **Fast testplan:** Vi testede programmet ved at køre det manuelt og tjekke, om resultatet var rigtigt, som beskrevet under "Testet ved" i hvert afsnit. Det virkede, men hver person testede på sin egen måde, og vi skrev ikke altid ned, hvad vi forventede at se. Næste gang ville vi lave en fast testplan med hvad der testes, hvilket input der bruges og hvad resultatet skal være. Fx: "Søg på IP 203.0.113.250 – forventet resultat: 18 linjer med FAILED." Så kan alle i gruppen teste på samme måde, og vi kan teste det hele igen, når nogen ændrer i koden.
+## Forbedringsmuligheder
 
-- **Valg af logfil:** Programmet læser i dag kun cyber_security_log_sample.txt, fordi filnavnet står fast i koden. Det var nok til opgaven, men i virkeligheden får Bumle Business nye logs hele tiden. Hvis brugeren selv kunne skrive filnavnet med input(), kunne programmet bruges på alle deres logfiler. Vores fejlhåndtering med try/except gør allerede, at en forkert fil giver en fejlbesked i stedet for et crash, så det ville være en lille ændring.
+- **Fast testplan:** Vi testede programmet manuelt ved at køre det og tjekke resultatet, som beskrevet under "Testet ved" og "Resultat" i hvert afsnit. Testene blev lavet af den, der havde skrevet modulet, og blev beskrevet forskelligt. Næste gang ville vi lave en fælles testplan med hvad der testes, hvilket input der bruges og hvad resultatet skal være. Fx: "Brute force-analyse – forventet resultat: IP 203.0.113.250 med 18 mislykkede logins." Så kan alle i gruppen teste på samme måde, og vi kan teste det hele igen, når nogen ændrer i koden.
 
-- **Justerbar brute force-grænse:** find_brute_force() bruger faste værdier: mindst 5 mislykkede logins inden for 5 minutter. Det fandt angrebet fra 203.0.113.250, men en angriber, der går langsommere, ville ikke blive fundet. Hvis brugeren selv kunne vælge antal forsøg og tidsrum, kunne programmet tilpasses til forskellige situationer.
+- **Valg af logfil:** Programmet læser i dag kun cyber_security_log_sample.txt, fordi stien står fast i koden (LOG_FILE_PATH i data_loader.py). Det var nok til opgaven, men i virkeligheden får Bumle Business nye logs hele tiden. Hvis brugeren selv kunne skrive filnavnet med input(), kunne programmet bruges på alle deres logfiler. Vores try/except i load_logs() gør allerede, at en forkert fil giver en fejlbesked i stedet for et crash, så det ville være en lille ændring.
 
-- **Bedre brug af GitHub:** Vi arbejdede alle direkte i main. Flere gange blev et push afvist, fordi en anden havde pushet lige før, og vi brugte tid på at rette det. Vi lærte, at man altid skal lave pull, før man begynder at skrive, og igen før man pusher. Gør vi det fast fra starten næste gang, undgår vi de fleste af problemerne.
+- **Justerbar brute force-grænse:** find_brute_force() bruger standardværdierne 5 mislykkede logins inden for 5 minutter. Det fandt angrebet fra 203.0.113.250, men en angriber, der går langsommere, ville ikke blive fundet. Funktionen tager allerede min_attempts og window_minutes som parametre, så vi skulle kun spørge brugeren om værdierne i menuen.
 
-- **Bedre brug af Scrum:** Vi brugte user stories, acceptkriterier og Task Board, men vi holdt ikke daglige Scrum-møder. Derfor vidste vi ikke altid, hvad de andre arbejdede på, og nogle ting blev først opdaget sent. Et kort Daily Scrum, hvor hver person siger hvad de har lavet, hvad de laver nu og hvad der stopper dem, ville have givet bedre overblik og gjort det lettere at hjælpe hinanden.
+- **Bedre brug af GitHub:** De fleste af os committede direkte til main. Flere gange blev et push afvist, fordi en anden havde pushet lige før, og vi brugte tid på at rette det. Kun analyzer.py blev lavet i en branch og kom ind med en pull request. Næste gang ville vi altid lave pull, før vi begynder at skrive og igen før vi pusher, eller bruge branches til hver del, ligesom med analyzer.py.
 
+- **Bedre brug af Scrum:** Vi brugte user stories, tasks, acceptkriterier og Task Board, men vi holdt ikke Scrum-møder. Derfor vidste vi ikke altid, hvad de andre havde lavet, som vi også skriver i refleksionen under Main. Et kort Daily Scrum, hvor hver person siger hvad de har lavet, hvad de laver nu og hvad der stopper dem, ville have givet bedre overblik og gjort det lettere at hjælpe hinanden.
 ## Kilder
 
 - Claude (Anthropic, AI-assistent): Vi har brugt Claude som hjælp til at strukturere README-filen og til at få overblik over, hvad vi skulle skrive under de forskellige punkter. Indholdet bygger på vores eget arbejde og vores egne svar, hvor vi evt. har kunnet bede Claude som at stille os nogle spørgsmål, som vi ville besvare for at den så kunne skrive det med vores ord.
